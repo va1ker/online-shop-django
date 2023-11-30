@@ -24,6 +24,7 @@ class AccountManager(BaseUserManager):
 		extra_fields.setdefault('is_superuser', False)
 
 		email = self.normalize_email(email)
+		print(self)
 		user 	= self.model(
 			email=email, 
 			first_name=first_name, 
@@ -37,7 +38,7 @@ class AccountManager(BaseUserManager):
 	
 	def create_superuser(self, email, password, **extra_fields):
 		"""
-        Create and save a SuperUser with the given email and password.
+		Create and save a SuperUser with the given email and password.
 		"""
 		extra_fields.setdefault('is_staff', True)
 		extra_fields.setdefault('is_superuser', True)
@@ -47,9 +48,7 @@ class AccountManager(BaseUserManager):
 			raise ValueError('Superuser must have is_staff=True.')
 		if extra_fields.get('is_superuser') is not True:
 			raise ValueError('Superuser must have is_superuser=True.')
-
-		self.user.is_admin = True
-		return self.create_user(email, password, **extra_fields)
+		return self.create_user(email=email, password=password, first_name=extra_fields["first_name"], last_name=extra_fields["last_name"],phone=extra_fields["phone"],is_staff=True,is_superuser=True,is_active=True)
 
 class Account(AbstractBaseUser, PermissionsMixin):
 	email 		= models.EmailField('Email', max_length=254, unique=True)
@@ -69,8 +68,10 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
 	def __str__(self):
 		 return self.email
+	
 	def get_full_name(self):
 		return f'{self.first_name} {self.last_name}'
+	
 	def get_absolute_url(self):
 		return reverse("account:profile", kwargs={"pk": self.pk})
 	

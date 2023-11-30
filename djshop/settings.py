@@ -30,8 +30,8 @@ environ.Env.read_env()
 SECRET_KEY = 'django-insecure-l1c^^g-yyl=2+owvx-i#3571=v)1ibe9uq(@%-i3jkq381b3&_'
 
 # Stripe Configuration
-STRIPE_SECRET_KEY       = env('STRIPE_SECRET_KEY')
-STRIPE_PUBLISHABLE_KEY  = env('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY       = "test"
+STRIPE_PUBLISHABLE_KEY  = "test"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -159,6 +159,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 # TailwindCSS apps
 TAILWIND_APP_NAME = 'theme'

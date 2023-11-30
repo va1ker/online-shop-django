@@ -49,3 +49,6 @@ def product_details(request, id, slug):
    context['product_images'] = ProductImages.objects.filter(product=product)
    
    return render(request, 'shop/product/details.html', context)
+
+def about(requests):
+   return render(requests,'about/about.html')
